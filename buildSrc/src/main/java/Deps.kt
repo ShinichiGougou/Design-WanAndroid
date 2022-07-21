@@ -44,7 +44,7 @@ object Version {
     const val bannerVersion = "2.2.2"
     const val flexboxVersion = "3.0.0"
 
-    const val agentWebVersion = "v4.1.9-androidx"
+    const val agentWebVersion = "v5.0.0-alpha.1-androidx"
     const val dataStoreVersion = "1.0.0"
 
     const val kotlinSerialVersion = "1.3.3"

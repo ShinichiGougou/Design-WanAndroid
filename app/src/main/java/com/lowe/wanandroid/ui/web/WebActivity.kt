@@ -8,6 +8,7 @@ import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
 import android.view.ViewGroup
+import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import androidx.activity.viewModels
 import androidx.core.os.bundleOf
@@ -16,6 +17,7 @@ import com.just.agentweb.WebChromeClient
 import com.just.agentweb.WebViewClient
 import com.lowe.wanandroid.BR
 import com.lowe.wanandroid.R
+import com.lowe.wanandroid.base.AppLog
 import com.lowe.wanandroid.base.app.AppViewModel
 import com.lowe.wanandroid.compat.IntentCompat
 import com.lowe.wanandroid.databinding.ActivityWebLayoutBinding
@@ -32,6 +34,7 @@ import javax.inject.Inject
 class WebActivity : BaseActivity<WebViewModel, ActivityWebLayoutBinding>() {
 
     companion object {
+        const val TAG = "WebActivity"
 
         fun loadUrl(context: Context, data: Activities.Web.WebIntent) {
             context.startActivity(intentTo(Activities.Web(bundle = bundleOf(Activities.Web.KEY_WEB_VIEW_Intent_bundle to data))))
@@ -67,6 +70,16 @@ class WebActivity : BaseActivity<WebViewModel, ActivityWebLayoutBinding>() {
             )
             .useDefaultIndicator(getPrimaryColor())
             .setWebViewClient(object : WebViewClient() {
+                override fun shouldOverrideUrlLoading(
+                    view: WebView?,
+                    request: WebResourceRequest?
+                ): Boolean {
+                    if (!request?.url.toString().startsWith("http")) {
+                        AppLog.d(TAG, "拦截url：${request?.url}")
+                        return true
+                    }
+                    return super.shouldOverrideUrlLoading(view, request)
+                }
                 override fun onPageFinished(view: WebView?, url: String?) {
                     super.onPageFinished(view, url)
                     currentUrl = url.orEmpty()
@@ -116,9 +129,10 @@ class WebActivity : BaseActivity<WebViewModel, ActivityWebLayoutBinding>() {
         super.onDestroy()
     }
 
-    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        if (agentWeb.handleKeyEvent(keyCode, event)) return true
-        return super.onKeyDown(keyCode, event)
+    override fun onBackPressed() {
+        if (!agentWeb.back()) {
+            finish()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -161,7 +175,11 @@ class WebActivity : BaseActivity<WebViewModel, ActivityWebLayoutBinding>() {
             intentObservable = viewModel.webDataObservable
             notifyPropertyChanged(BR.intentObservable)
             setSupportActionBar(toolbar)
-            toolbar.setNavigationOnClickListener { finish() }
+            toolbar.setNavigationOnClickListener {
+                if (!agentWeb.back()) {
+                    finish()
+                }
+            }
             collect.setOnClickListener { changeCollectStatus() }
         }
     }
