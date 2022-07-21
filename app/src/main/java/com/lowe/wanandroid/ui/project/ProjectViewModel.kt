@@ -16,15 +16,10 @@ class ProjectViewModel @Inject constructor(private val repository: ProjectReposi
     val projectTitleListLiveData = liveData<List<ProjectTitle>> {
         emit(
             mutableListOf<ProjectTitle>().apply {
-                add(generateNewestProjectBean())
                 addAll(repository.getProjectTitleList().getOrElse { emptyList() })
             }
         )
     }
     val parentRefreshLiveData = MutableLiveData<Int>()
     val scrollToTopLiveData = MutableLiveData<Int>()
-
-    private fun generateNewestProjectBean() = ProjectTitle(
-        id = ProjectChildFragment.CATEGORY_ID_NEWEST_PROJECT, name = "最新项目"
-    )
 }

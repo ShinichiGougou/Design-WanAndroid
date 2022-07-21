@@ -12,8 +12,4 @@ class ProjectServiceImpl @Inject constructor() : ProjectService {
 
     override suspend fun getProjectPageList(pageNo: Int, pageSize: Int, categoryId: Int) =
         service.getProjectPageList(pageNo, pageSize, categoryId)
-
-    override suspend fun getNewProjectPageList(pageNo: Int, pageSize: Int) =
-        service.getNewProjectPageList(pageNo, pageSize)
-
 }

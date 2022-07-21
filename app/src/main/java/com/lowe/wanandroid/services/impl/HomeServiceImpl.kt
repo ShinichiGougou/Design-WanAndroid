@@ -19,4 +19,6 @@ class HomeServiceImpl @Inject constructor() : HomeService {
         service.getSquarePageList(pageNo, pageSize)
 
     override suspend fun getAnswerPageList(pageNo: Int) = service.getAnswerPageList(pageNo)
+
+    override suspend fun getProjPageList(pageNo: Int, pageSize: Int) = service.getProjPageList(pageNo, pageSize)
 }

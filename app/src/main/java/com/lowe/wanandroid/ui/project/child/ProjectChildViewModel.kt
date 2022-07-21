@@ -18,9 +18,7 @@ class ProjectChildViewModel @Inject constructor(private val repository: ProjectR
     private val _fetchProjects = Channel<Int>(Channel.CONFLATED)
 
     val getProjectListFlow = _fetchProjects.receiveAsFlow().flatMapLatest {
-        if (it == ProjectChildFragment.CATEGORY_ID_NEWEST_PROJECT) repository.getNewProjectListFlow(
-            DEFAULT_PAGE_SIZE
-        ) else repository.getProjectListFlow(DEFAULT_PAGE_SIZE, it)
+        repository.getProjectListFlow(DEFAULT_PAGE_SIZE, it)
     }.cachedIn(viewModelScope)
 
     fun fetch(categoryId: Int) {

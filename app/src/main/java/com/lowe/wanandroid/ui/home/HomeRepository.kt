@@ -93,4 +93,20 @@ class HomeRepository @Inject constructor(private val service: HomeService) {
                 service.getAnswerPageList(page).getOrNull()?.datas ?: emptyList()
             }
         }.flow
+
+    fun getProjPageList() =
+        Pager(
+            PagingConfig(
+                pageSize = BaseViewModel.DEFAULT_PAGE_SIZE,
+                initialLoadSize = BaseViewModel.DEFAULT_PAGE_SIZE,
+                enablePlaceholders = false
+            )
+        ) {
+            IntKeyPagingSource(
+                BaseService.DEFAULT_PAGE_START_NO,
+                service = service
+            ) { service, page, size ->
+                service.getProjPageList(page, size).getOrNull()?.datas ?: emptyList()
+            }
+        }.flow
 }

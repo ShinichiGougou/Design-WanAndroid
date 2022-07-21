@@ -45,4 +45,13 @@ interface HomeService : BaseService {
      */
     @GET("wenda/list/{pageNo}/json")
     suspend fun getAnswerPageList(@Path("pageNo") pageNo: Int): NetworkResponse<PageResponse<Article>>
+
+    /**
+     * 项目列表
+     */
+    @GET("article/listproject/{pageNo}/json")
+    suspend fun getProjPageList(
+        @Path("pageNo") pageNo: Int,
+        @Query("page_size") pageSize: Int
+    ): NetworkResponse<PageResponse<Article>>
 }

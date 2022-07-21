@@ -75,5 +75,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.f
         HomeTabBean(HomeChildFragmentAdapter.HOME_TAB_EXPLORE),
         HomeTabBean(HomeChildFragmentAdapter.HOME_TAB_SQUARE),
         HomeTabBean(HomeChildFragmentAdapter.HOME_TAB_ANSWER),
+        HomeTabBean(HomeChildFragmentAdapter.HOME_TAB_PROJ),
     )
 }

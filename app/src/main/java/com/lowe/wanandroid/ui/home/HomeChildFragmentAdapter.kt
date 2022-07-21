@@ -7,6 +7,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.lowe.wanandroid.ui.home.child.answer.AnswerFragment
 import com.lowe.wanandroid.ui.home.child.explore.ExploreFragment
+import com.lowe.wanandroid.ui.home.child.proj.ProjFragment
 import com.lowe.wanandroid.ui.home.child.square.SquareFragment
 import kotlinx.parcelize.Parcelize
 
@@ -20,6 +21,7 @@ class HomeChildFragmentAdapter(
         const val HOME_TAB_EXPLORE = "首页"
         const val HOME_TAB_SQUARE = "广场"
         const val HOME_TAB_ANSWER = "问答"
+        const val HOME_TAB_PROJ = "项目"
     }
 
     override fun getItemCount() = items.size
@@ -29,6 +31,7 @@ class HomeChildFragmentAdapter(
             HOME_TAB_EXPLORE -> ExploreFragment.newInstance(items[position])
             HOME_TAB_SQUARE -> SquareFragment.newInstance(items[position])
             HOME_TAB_ANSWER -> AnswerFragment.newInstance(items[position])
+            HOME_TAB_PROJ -> ProjFragment.newInstance(items[position])
             else -> ExploreFragment.newInstance(items[position])
         }
     }

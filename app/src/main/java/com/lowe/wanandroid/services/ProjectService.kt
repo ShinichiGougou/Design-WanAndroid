@@ -25,13 +25,4 @@ interface ProjectService : BaseService {
         @Query("page_size") pageSize: Int,
         @Query("cid") categoryId: Int
     ): NetworkResponse<PageResponse<Article>>
-
-    /**
-     * 最新项目列表
-     */
-    @GET("article/listproject/{pageNo}/json")
-    suspend fun getNewProjectPageList(
-        @Path("pageNo") pageNo: Int,
-        @Query("page_size") pageSize: Int
-    ): NetworkResponse<PageResponse<Article>>
 }
