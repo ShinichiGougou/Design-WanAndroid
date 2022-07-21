@@ -25,7 +25,8 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:contentInsetStartWithNavigation="0dp"
-            app:navigationIcon="@drawable/ic_arrow_back_24dp"
+            app:navigationIcon="@drawable/ic_close_24dp"
+            app:navigationIconTint="?colorPrimary"
             app:titleMarginStart="0dp">
 
             <LinearLayout

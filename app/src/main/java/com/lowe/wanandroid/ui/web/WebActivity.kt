@@ -129,12 +129,6 @@ class WebActivity : BaseActivity<WebViewModel, ActivityWebLayoutBinding>() {
         super.onDestroy()
     }
 
-    override fun onBackPressed() {
-        if (!agentWeb.back()) {
-            finish()
-        }
-    }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.web_action_menu, menu)
         return super.onCreateOptionsMenu(menu)
@@ -176,9 +170,7 @@ class WebActivity : BaseActivity<WebViewModel, ActivityWebLayoutBinding>() {
             notifyPropertyChanged(BR.intentObservable)
             setSupportActionBar(toolbar)
             toolbar.setNavigationOnClickListener {
-                if (!agentWeb.back()) {
-                    finish()
-                }
+                finish()
             }
             collect.setOnClickListener { changeCollectStatus() }
         }
